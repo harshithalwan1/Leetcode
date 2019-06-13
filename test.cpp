@@ -1,27 +1,30 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<stack>
 
 using namespace std;
 
-int maxSubArray(vector<int>& nums) {
-        int currentMax = nums[0] ;
-        int Max = nums[0];
-        for(int i = 1;i<nums.size();++i){
-            if(nums[i] > currentMax+nums[i]){
-                currentMax = nums[i];
-            }
-            else{
-                currentMax = currentMax+nums[i];
-            }
-            if(currentMax>Max){
-                Max = currentMax;
+string removeOuterParentheses(string S) {
+        stack<char>par {};
+        string str {};
+        int open {};
+        int close {};
+        for(int i = 0,j = 0; j<S.size(); ++j){
+            if(S[j]=='(') ++open;
+            else ++close;
+            if(open==close){
+                str = str + S.substr(i+1,j-i-1);
+                i = j + 1;
             }
         }
-        return Max;
+        return str;
     }
 
+
 int main() {
-    vector<int>vec = {-1};
-    cout<<maxSubArray(vec);
+    string s = "((()))(()())";
+    string res = removeOuterParentheses(s);
+    cout<<res;
+    
 }

@@ -13,7 +13,6 @@ bool jumpIndex(vector<int>& nums,vector<bool>& jumpStatus, int n){
     // cout<<endl;
     bool status {};
     for(int i = n-1; i > -1; --i){
-        if(nums[i-nums.size()])
         for(int j = nums[i]; j > -1; --j){
             jumpStatus[i] = jumpStatus[i] || jumpStatus[i+j];
         }
