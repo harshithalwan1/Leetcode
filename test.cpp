@@ -2,34 +2,40 @@
 #include<vector>
 #include<string>
 #include<stack>
-#include<stdlib.h>
 #include<stdio.h>
+#include<list>
+#include<iterator>
+#include<climits>
+#include <math.h>
 
 using namespace std;
 
-vector<string> fizzBuzz(int n) {
-        vector<string> result {};
-        for(int i = 1; i < n+1; i++){
-            if(i%3==0 && i%5==0){
-                result.push_back("FizzBuzz");
-            }
-            else if(i%3==0){
-                result.push_back("Fizz");
-            }
-            else if(i%5==0){
-                result.push_back("Buzz");
-            }
-            else{
-                result.push_back(to_string(i));
-            }
+int myAtoi(string str) {
+        int i = 0;
+        int result {};
+        bool negative = false;
+        while(i<str.size() && str[i] == ' '){
+            i++;
         }
+        if(str[i] == '-'){
+            negative = true;
+            i++;
+        }
+        for(; i < str.size() && str[i]>48 && str[i]<58 ; i++){
+            if(result*10 + (str[i]-48) >= INT_MAX || result*10 + (str[i]-48) <= INT_MIN){
+                return INT_MAX;
+            }
+            if(negative && result*10 + (str[i]-48) >= INT_MAX || result*10 + (str[i]-48) <= INT_MIN){
+                return INT_MIN;
+            }
+            result = result*10 + (str[i]-48);
+        }
+
         return result;
     }
 
 int main() {
-    vector<string> vec = fizzBuzz(15);
-    for(auto i = vec.begin(); i!=vec.end(); ++i){
-        cout<<*i<<" ";
-    }
-
+    string s = "-91283472332";
+    //cout<<pow(10,0)<<" "<<pow(10,2)<<" "<<(int)s[4]-48;
+    cout<<myAtoi(s);
 }
